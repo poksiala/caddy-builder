@@ -1,3 +1,5 @@
+[![Build Status](https://drone.pohina.io/api/badges/poksiala/caddy-builder/status.svg)](https://drone.pohina.io/poksiala/caddy-builder)
+
 # builder
 
 Docker image for building Caddy binaries.
