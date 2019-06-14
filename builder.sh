@@ -28,7 +28,7 @@ get_package() {
         cp -r /dnsproviders/$1/$1.go /caddy/dnsproviders/$1/$1.go
         echo "caddy/dnsproviders/$1"
     else
-        GO111MODULE=off GOOS=linux GOARCH=amd64 caddyplug package $1 2> /dev/null
+        GO111MODULE=off GOOS=linux GOARCH=arm64 caddyplug package $1 2> /dev/null
     fi
 }
 
@@ -112,7 +112,7 @@ end_stage
 
 # plugin helper
 stage "installing plugin helper"
-GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
+GOOS=linux GOARCH=arm64 go get -v github.com/abiosoft/caddyplug/caddyplug
 end_stage
 
 # check for modules support
