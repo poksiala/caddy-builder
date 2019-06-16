@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: default
+name: Test Build
 
 platform:
   os: linux
@@ -12,6 +12,19 @@ steps:
   settings:
     repo: poksiala/caddy-builder
     dry_run: true
+  
+trigger:
+  branch:
+    exclude:
+      - master
+
+---
+kind: pipeline
+name: Publish Hub
+
+platform:
+  os: linux
+  arch: arm64
 
 - name: Publish
   image: plugins/docker
@@ -19,10 +32,35 @@ steps:
     username: poksiala
     password:
       from_secret: docker_password
-    repo: poksiala/caddy-builder
-    tags: latest
-  when:
-    branch:
-    - master
-    event:
-    - push
+    repo: poksiala/caddy
+    tags: builder
+
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+---
+kind: pipeline
+name: Publish Registry
+
+platform:
+  os: linux
+  arch: arm64
+
+- name: Publish
+  image: plugins/docker
+  settings:
+    username: poksiala
+    password:
+      from_secret: docker_password
+    repo: registry.pohina.io/caddy
+    registry: registry.pohina.io
+    tags: builder
+
+trigger:
+  branch:
+  - master
+  event:
+  - push
