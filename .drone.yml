@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: Test Build
+name: Test
 
 platform:
   os: linux
@@ -26,6 +26,7 @@ platform:
   os: linux
   arch: arm64
 
+steps:
 - name: Publish
   image: plugins/docker
   settings:
@@ -49,6 +50,7 @@ platform:
   os: linux
   arch: arm64
 
+steps:
 - name: Publish
   image: plugins/docker
   settings:
